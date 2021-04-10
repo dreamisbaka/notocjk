@@ -6,6 +6,12 @@ if [ $API -ge "26" ] && [ -f $MIRRORPATH$FILEPATH$FILE ]; then
 mkdir -p $MODPATH$FILEPATH
 cp -af $MIRRORPATH$FILEPATH$FILE $MODPATH$FILEPATH$FILE
 sed -i '
+/begin/,/end/d
+' $MODPATH$FILEPATH$FILE
+sed -i '
+/Miui/,+1d;:go;1!{P;$!N;D};N;bgo
+' $MODPATH$FILEPATH$FILE
+sed -i '
 /<family lang=\"zh-Hans\">/,/<\/family>/ {:a;N;/<\/family>/!ba;
 s/<family lang=\"zh-Hans\">.*Noto.*CJK.*<\/family>/<family lang="zh-Hans">\n<font weight="100" style="normal" index="3">NotoSansCJK-VF.ttc<axis tag="wght" stylevalue="100" \/><\/font>\n<font weight="300" style="normal" index="3">NotoSansCJK-VF.ttc<axis tag="wght" stylevalue="300" \/><\/font>\n<font weight="400" style="normal" index="3">NotoSansCJK-VF.ttc<axis tag="wght" stylevalue="400" \/><\/font>\n<font weight="500" style="normal" index="3">NotoSansCJK-VF.ttc<axis tag="wght" stylevalue="500" \/><\/font>\n<font weight="600" style="normal" index="3">NotoSansCJK-VF.ttc<axis tag="wght" stylevalue="600" \/><\/font>\n<font weight="700" style="normal" index="3">NotoSansCJK-VF.ttc<axis tag="wght" stylevalue="700" \/><\/font>\n<font weight="900" style="normal" index="3">NotoSansCJK-VF.ttc<axis tag="wght" stylevalue="900" \/><\/font>\n<font weight="200" style="normal" index="2" fallbackFor="serif">NotoSerifCJK-ExtraLight.ttc<\/font>\n<font weight="300" style="normal" index="2" fallbackFor="serif">NotoSerifCJK-Light.ttc<\/font>\n<font weight="400" style="normal" index="2" fallbackFor="serif">NotoSerifCJK-Regular.ttc<\/font>\n<font weight="500" style="normal" index="2" fallbackFor="serif">NotoSerifCJK-Medium.ttc<\/font>\n<font weight="600" style="normal" index="2" fallbackFor="serif">NotoSerifCJK-SemiBold.ttc<\/font>\n<font weight="700" style="normal" index="2" fallbackFor="serif">NotoSerifCJK-Bold.ttc<\/font>\n<font weight="900" style="normal" index="2" fallbackFor="serif">NotoSerifCJK-Black.ttc<\/font>\n<\/family>/};
 ' $MODPATH$FILEPATH$FILE
